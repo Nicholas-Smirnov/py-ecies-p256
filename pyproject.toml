@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "py-ecies-p256"
+version = "1.0.0"
+description = "Educational ECIES (Elliptic-Curve Integrated Encryption Scheme) over NIST P-256 with HKDF-SHA256 and ChaCha20-Poly1305"
+readme = "README.md"
+requires-python = ">=3.9"
+authors = [{ name = "You" }]
+dependencies = [
+  "cryptography>=42.0.0",
+  "pytest>=7.0.0"
+]
+
+[project.scripts]
+ecies-demo = "examples.demo:main"
+
+[project.urls]
+Homepage = "https://example.com"
