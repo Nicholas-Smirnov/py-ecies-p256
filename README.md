@@ -2,14 +2,14 @@
 
 Simple implementation of **ECIES** (Elliptic‑Curve Integrated Encryption Scheme) over **NIST P‑256**, using **HKDF‑SHA256** and **ChaCha20‑Poly1305** as the AEAD.
 
-## ✨ What you’ll see
+## Overview
 - **Finite fields** $\mathbb{F}_p$: modular add/sub/mul/inverse using Fermat’s little theorem.
 - **Elliptic curves** over $\mathbb{F}_p$: P‑256 with affine group law (point add/double, infinity).
 - **Scalar multiplication**: left‑to‑right double‑and‑add; why $nG=\mathcal{O}$ at the group order.
 - **ECIES = KEM + DEM**: ephemeral ECDH → HKDF → AEAD (key + nonce) with **context binding** (AAD/`info`).
 
 
-## 🧮 Short math overview
+## Short math overview
 
 ### P‑256 field and curve
 - Prime
@@ -38,7 +38,7 @@ Simple implementation of **ECIES** (Elliptic‑Curve Integrated Encryption Schem
 
 
 
-## 📦 Project layout
+## Project layout
 ```
 src/ecies/
   field.py       # Finite field F_p operations
@@ -52,7 +52,7 @@ tests/           # pytest unit tests
 
 
 
-## 🚀 Quick start
+## Quick start
 ```bash
 python -m venv .venv && source .venv/bin/activate
 pip install -e .
@@ -73,7 +73,7 @@ Decrypted: b'hello, ECIES world!'
 
 
 
-## 🔍 Security notes (honest & practical)
+## Security notes
 - **Not constant‑time.** CPython can leak via timing/cache; this repo is for education.
 - **On‑curve validation** is enforced; P‑256’s cofactor = 1 simplifies subgroup issues.
 - **Context binding:** ECIES uses `info = b"ECIES-P256-HKDF-SHA256|" + ctx_info` and AAD in AEAD to reduce UKS/KCI surprises.
@@ -83,7 +83,7 @@ Decrypted: b'hello, ECIES world!'
 
 
 
-## 🧪 Tests included
+## Tests included
 - Field math: add/sub/mul/inv, negatives, modp sanity.
 - Curve ops: on‑curve checks, add/double identities, $nG=\mathcal{O}$.
 - HKDF: determinism and length.
@@ -97,7 +97,7 @@ pytest -q
 
 
 
-## 🗺️ Roadmap (stretch ideas)
+## Roadmap
 - Compressed point parsing (requires Tonelli‑Shanks square root mod p).
 - Regularized scalar multiplication (Montgomery ladder style) + timing harness.
 - Pre‑computation/batching for performance demonstrations.
@@ -106,7 +106,7 @@ pytest -q
 
 
 
-## 📚 References
+## References
 - NIST FIPS 186‑5 (Digital Signature Standard) for P‑256 parameters.
 - RFC 5869 (HKDF).
 - ChaCha20‑Poly1305 (RFC 8439).
